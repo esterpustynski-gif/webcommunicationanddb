@@ -19,7 +19,7 @@ def get_rooms():
 
 @app.get("/")
 def read_root():
-    return {"msg": "Yelloooo!"}
+    return {"msg": "Hi, yelloooo!"}
 @app.get("/api/ip")
 def get_ip(request: Request):
     return {"ip": request.client.host}
