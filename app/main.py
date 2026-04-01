@@ -1,6 +1,21 @@
 from fastapi import FastAPI, Request
 
 app = FastAPI()
+rooms = [
+    {"room number": 100,
+     "room type": "single",
+     "price": 75},
+     {"room number": 101,
+     "room type": "double",
+     "price": 100},
+     {"room number": 102,
+     "room type": "suite",
+     "price": 150}
+]
+
+@app.get("/api/rooms")
+def get_rooms():
+    return rooms
 
 @app.get("/")
 def read_root():
