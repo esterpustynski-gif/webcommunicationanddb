@@ -1,8 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
-from app.db import get_conn
-
+from app.db import get_conn, create_schema
 
 app = FastAPI()
 
@@ -16,13 +15,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+create_schema()
+
 # Main route for this API
 @app.get("/")
 def read_root(): 
     with get_conn() as conn, conn.cursor() as cur:
-        cur.execute("SELECT 'hello postgres' ")
+        cur.execute("SELECT version() ")
         result = cur.fetchone()
-    # f-string concatenation
+
     return { "msg": f"Hotel API!", "db_status": result }
 
 # List all rooms 
