@@ -14,7 +14,7 @@ def get_rooms():
         {"room number": 102,
         "room type": "suite",
         "price": 150}
-    ]
+]
 
 @app.get("/api/rooms")
 def get_rooms():
