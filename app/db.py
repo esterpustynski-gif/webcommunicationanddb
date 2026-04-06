@@ -5,13 +5,15 @@ def get_conn():
 def create_schema():
     with get_conn() as conn, conn.cursor() as cur:
         cur.execute("""
-            CREATE TABLE IF NOT EXISTS rooms (
+            CREATE TABLE IF NOT EXISTS hotel_rooms (
                 id SERIAL PRIMARY KEY,
                 room_number INT NOT NULL,
-                created_at TIMESTAMP DEFAULT now()
+                type VARCHAR NOT NULL,
+                price NUMERIC NOT NULL
             );
-            ALTER TABLE rooms ADD COLUMN IF NOT EXISTS room_type VARCHAR;   
+            ALTER TABLE hotel_rooms ADD COLUMN IF NOT EXISTS room_type VARCHAR;
 
         """)
+        
 
         
