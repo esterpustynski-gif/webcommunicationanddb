@@ -11,9 +11,22 @@ def create_schema():
                 type VARCHAR NOT NULL,
                 price NUMERIC NOT NULL
             );
-            ALTER TABLE hotel_rooms ADD COLUMN IF NOT EXISTS room_type VARCHAR;
 
         """)
+        cur.execute("""
+           CREATE TABLE IF NOT EXISTS hotel_guests (
+             id SERIAL PRIMARY KEY,
+             firstname VARCHAR NOT NULL,
+             lastname VARCHAR NOT NULL,
+            address VARCHAR NOT NULL
+            );
+        """)
         
-
-        
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS hotel_bookings (
+                id SERIAL PRIMARY KEY,
+                guest_id INT NOT NULL REFERENCES hotel_guests(id),
+                room_id INT NOT NULL REFERENCES hotel_rooms(id),
+                addinfo TIMESTAMP NOT NULL
+            );
+        """)
